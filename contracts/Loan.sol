@@ -2,6 +2,7 @@ prgama solidity 0.8.15;
 
 
 //@ notice all enum values are written in CAPS
+//@ notice enums works best if combined with a function that changes its state. In this particular case, this is the _transitionTo function
 contract Loan {
 enum State {
                 PENDING,                                //1st stage - investors investing the loan
