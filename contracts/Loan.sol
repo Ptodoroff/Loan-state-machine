@@ -1,4 +1,4 @@
-prgama solidity 0.8.15;
+pragma solidity 0.8.15;
 
 
 //@ notice all enum values are written in CAPS
@@ -34,15 +34,15 @@ address payable public lender;
 constructor (uint _amount, uint _interest, uint _duration, address payable _borrower, address payable _lender) {
         amount = _amount;
         interest = _interest;
-        end = block.timestamp + duration;
+        end = block.timestamp + _duration;
         borrower=_borrower;
         lender=_lender;
 
 }
 
 function fundLoan () external payable {
-        require(amount == msg.value, "You should lend the amount, defined in the constructor");
-        require(lender == msg.sender, "Callable only by the lender");  
+        require( msg.value ==amount, "You should lend the amount, defined in the constructor");
+        require( msg.sender == lender, "Callable only by the lender");  
         _transitionTo(State.ACTIVE);                        //placed before the actual transfer, because if this function fails to execute, the funds wont be transferred to the borrower
         borrower.transfer(amount);                         //transfers the deposited funds to the borrower                                 
 
